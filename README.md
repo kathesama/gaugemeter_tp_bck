@@ -6,24 +6,53 @@
 ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg?style=for-the-badge)
 <br>
-[![GitHub issues](https://img.shields.io/github/issues/kathesama/bck_node_mongo_clean?style=plastic)](https://github.com/kathesama/bck_node_mongo_clean/issues)
-[![GitHub forks](https://img.shields.io/github/forks/kathesama/bck_node_mongo_clean?style=plastic)](https://github.com/kathesama/bck_node_mongo_clean/network)
-[![GitHub stars](https://img.shields.io/github/stars/kathesama/bck_node_mongo_clean?style=plastic)](https://github.com/kathesama/bck_node_mongo_clean/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/kathesama/gaugemeter_tp_bck?style=plastic)](https://github.com/kathesama/gaugemeter_tp_bck/issues)
+[![GitHub forks](https://img.shields.io/github/forks/kathesama/gaugemeter_tp_bck?style=plastic)](https://github.com/kathesama/gaugemeter_tp_bck/network)
+[![GitHub stars](https://img.shields.io/github/stars/kathesama/gaugemeter_tp_bck?style=plastic)](https://github.com/kathesama/gaugemeter_tp_bck/stargazers)
 <br>
-![GitHub last commit](https://img.shields.io/github/last-commit/kathesama/bck_node_mongo_clean?color=red&style=plastic)
-![GitHub version commits](https://img.shields.io/github/commits-since/kathesama/bck_node_mongo_clean/V2.0.0.svg?color=yellow&style=plastic)
-![GitHub top language](https://img.shields.io/github/languages/top/kathesama/bck_node_mongo_clean?style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/kathesama/gaugemeter_tp_bck?color=red&style=plastic)
+![GitHub version commits](https://img.shields.io/github/commits-since/kathesama/gaugemeter_tp_bck/V2.0.0.svg?color=yellow&style=plastic)
+![GitHub top language](https://img.shields.io/github/languages/top/kathesama/gaugemeter_tp_bck?style=plastic)
 <br>
 ![Maintaned](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=plastic)
 ![OWASP](https://img.shields.io/badge/OWASP%3F-yes-green.svg?style=plastic)
 ![OWASP](https://img.shields.io/badge/CleanCode%3F-yes-green.svg?style=plastic)
-[![GitHub license](https://img.shields.io/github/license/kathesama/bck_node_mongo_clean?style=plastic)](https://github.com/kathesama/bck_node_mongo_clean/blob/main/LICENSE)
-![GitHub repo size](https://img.shields.io/github/repo-size/kathesama/bck_node_mongo_clean?style=plastic)
+[![GitHub license](https://img.shields.io/github/license/kathesama/gaugemeter_tp_bck?style=plastic)](https://github.com/kathesama/gaugemeter_tp_bck/blob/main/LICENSE)
+![GitHub repo size](https://img.shields.io/github/repo-size/kathesama/gaugemeter_tp_bck?style=plastic)
 <br>
 
-# bck_node_mongo_clean
-Backend for Farm proyect
+# gaugemeter_tp_bck
+Backend para el proyecto de la asignatura de Desarrollo de Aplicaciones Multiplataforma.
 
+## Ejecución del proyecto:
+---
+### Ejecutar el proyecto para desarrollo con la imagen de docker hub y con mongo remoto:
+1. Clonar este repo:
+> git clone https://github.com/kathesama/gaugemeter_tp_bck.git
+2. Modificar *docker-compose* en los parametros de enviroment.
+2. Ejecutar:
+> docker-compose -f .\docker-compose.yml up
+---
+### Ejecutar el proyecto para desarrollo sin la imagen de docker hub y con mongo local en contenedor:
+1. Clonar este repo:
+> git clone https://github.com/kathesama/gaugemeter_tp_bck.git
+2. Ejecutar
+> npm install
+3. Renombrar *.env.example* a *.env* y modificar los valores de las variables:<br>
+  Para el docker-compose.mongo.yml modificar por:
+  * MONGO_URL=mongodb://root:pass12345@10.0.0.101:27017/?authSource=admin
+4. En el script *./mongo/resotre.sh*, modificar el nombre de la base de datos por seteada en el archivo *.env*.
+4. Instalar husky, para ello ejecute los siguientes pasos:
+  * [Ir a pasos y empezar desde el 4to](#pasos-para-configurar-husky)
+5. Ejecutar:
+> docker-compose -f .\docker-compose.mongo-dev.yml up
+6. Ejecutar:
+> npm run start:dev
+
+Para administrar mongo se recomienda usar *MongoDB Compass*: https://www.mongodb.com/try/download/compass
+
+
+## Pasos para configurar Husky
 Para crear un proyecto desde cero con Husky, abrir una consola y:
 1. Crear una carpeta:
 > mkdir [nombre del proyecto]
@@ -32,13 +61,23 @@ Para crear un proyecto desde cero con Husky, abrir una consola y:
 3. Inicializar Node
 > npm init
 4. Iniciar Husky
-> npx husky-init && npm install
+> npx husky-init
 5. Configurar Husky con lint-staged (Ejecutar en consola)<br>
-a. $ npm i -D lint-staged<br>
-b. $ npm set-script prepare "husky install"<br>
-c. $ npm run prepare<br>
-d. $ npx husky add .husky/pre-commit 'npx lint-staged'<br>
-e. Este proyecto usa *git-commit-msg-linter* para tener un patron de desarrollo en git<br>
+a. npm i -D lint-staged<br>
+b. npm set-script prepare "husky install"<br>
+c. npm run prepare<br>
+d. npx husky add .husky/pre-commit 'npx lint-staged'<br>
+e. Luego abrir *.git/hooks/commit-msg*, buscar la funcion main y reemplazar:
+
+>const commitMsgFilePath = process.argv[2];
+
+por:
+
+>const commitMsgFilePath = path.resolve(process.env.PWD, process.argv[2].substring(1));
+
+-> Esto corrige el path para el archivo COMMIT_EDITMSG.
+
+**Nota**: Este proyecto usa *git-commit-msg-linter* para tener un patron de desarrollo en git<br>
 
 ```
 correct format: <type>[scope]: <subject>
@@ -66,23 +105,15 @@ correct format: <type>[scope]: <subject>
   subject:
     Brief summary of the change in present tense. Not capitalized. No period at the end.
 ```
-
-Para que funcione con las nuevas versiones de husky, ejecutar por consola:
+---
+Nota: Para que funcione con las nuevas versiones de husky, ejecutar por consola:
 >$ npx husky add .husky/commit-msg ".git/hooks/commit-msg \$1"
-
-luego abrir *.git/hooks/commit-msg*, buscar la funcion main y reemplazar:
-
->const commitMsgFilePath = process.argv[2];
-
-por:
-
->const commitMsgFilePath = path.resolve(process.env.PWD, process.argv[2].substring(1));
-
-Esto corrige el path para el archivo COMMIT_EDITMSG.
 
 Y eso sería todo, restaría agregar los modulos que desees para trabajar.
 
-* npm i -D typescript
+---
+
+<!-- * npm i -D typescript
 * npm install -g -D jest <-- para poderlo configurar luego
 * npm i -D ts-jest @types/jest ts-node
 
@@ -100,9 +131,9 @@ Para que el servidor transpile automaticamente en tiempo de ejecución
 > npm i -D ts-node-dev
 
 Para importr automaticamente los archivos de una carpeta en otro como un indice
-> npm i fast-glob
+> npm i fast-glob -->
 
-Comandos útiles de Git.
+## Comandos útiles de Git.
 * Agregar los cambios al commit: git add .
 * Crear el commit: git git commit -m"[comando de git-commit-msg-linter] [mensaje]"
 * Ver que archivos han cambiado: git status
@@ -125,7 +156,14 @@ Comandos útiles de Git.
 > docker buildx create --name mybuilderconfig --use
 
 3. Build the image:
-> docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f Dockerfile -t kathemica/bck_node_mongo_clean:1.0.0 --push .
+- All platforms support:
+> docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f Dockerfile -t kathemica/gaugemeter_tp_bck:1.0.0 --push .
+
+- AMD support
+> docker buildx build -f Dockerfile -t kathemica/gaugemeter_tp_bck:1.0.3 --push .
+
+- Creating local images
+>  docker build -f Dockerfile -t kathemica/gaugemeter_tp_bck:1.0.3 .
 
 ---
 # Running container
@@ -149,7 +187,7 @@ docker run -d \
 -e DB_NAME= "INSERT YOUR DATABASE NAME HERE" \
 -e isHTTPS= "Will I to connect with HTTPS?" \
 -v $(pwd)/certs:/usr/app/certs \
-kathemica/bck_node_mongo_clean:1.0.1
+kathemica/gaugemeter_tp_bck:1.0.1
 
 ```
 *$(pwd)*: is the actual path.

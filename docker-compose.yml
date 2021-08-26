@@ -1,7 +1,7 @@
 version: "3.7"
 services:
-  bck_node_mongo_clean:
-    image: kathemica/bck_node_mongo_clean:latest
+  gaugemeter_tp_bck:
+    image: kathemica/gaugemeter_tp_bck:1.0.3
     hostname: node-backend
     container_name: node-backend
     restart: always
