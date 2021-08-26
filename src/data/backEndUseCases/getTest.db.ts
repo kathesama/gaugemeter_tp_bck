@@ -1,5 +1,5 @@
 import TestService from '../../domain/services/test.service';
-import { GetTestInterface, getTestModelInterface } from '../../interfaces/useCaseDTO/getTest.interfaces';
+import { GetTestInterface, getTestModelInterface } from '../../interfaces/useCaseDTO/Test.interfaces';
 
 export class GetTestUseCaseDB implements GetTestInterface {
   testService: any;

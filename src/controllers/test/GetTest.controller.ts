@@ -2,7 +2,7 @@ import { ControllerInterface } from '../../interfaces/controller.interface';
 import { serverErrorHelper, successHelper } from '../../helpers/http.helper';
 import { HttpResponse } from '../../interfaces/http.interface';
 
-import { GetTestInterface } from '../../interfaces/useCaseDTO/getTest.interfaces';
+import { GetTestInterface } from '../../interfaces/useCaseDTO/Test.interfaces';
 
 // import { Get, Route, Tags } from 'tsoa';
 

@@ -1,4 +1,4 @@
-import { getTestModelInterface } from '../interfaces/useCaseDTO/getTest.interfaces';
+import { getTestModelInterface } from '../interfaces/useCaseDTO/Test.interfaces';
 
 export class TestModelHelper implements getTestModelInterface {
   content: string;
