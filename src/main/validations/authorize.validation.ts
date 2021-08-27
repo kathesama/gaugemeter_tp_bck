@@ -38,6 +38,6 @@ export const authorize =
       next();
     } catch (error) {
       logger.error('Auth error');
-      return clientRequestHelper(res, error.statusCode, error.name);
+      return clientRequestHelper(res, error.statusCode, error.stack);
     }
   };

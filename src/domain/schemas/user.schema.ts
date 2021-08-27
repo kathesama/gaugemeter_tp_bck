@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-// import validator from 'validator';
 import { rolesTypes } from '../enums/roles.enum';
 
 const { Schema } = mongoose;
 
+// TODO: fix role class isolation, must be linked to roles table at DB
 const userSchema = new Schema(
   {
     firstName: {

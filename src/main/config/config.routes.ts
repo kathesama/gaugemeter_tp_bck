@@ -1,11 +1,17 @@
 // import fg from 'fast-glob';
 import * as express from 'express';
+import {
+  dispositivoRoutes,
+  electrovalvulaRoutes,
+  logRiegoRoutes,
+  medicionRoutes,
+  roleRoutes,
+  sessionRoutes,
+  testRoutes,
+  userRoutes,
+} from '../routes';
 // import swaggerUi from 'swagger-ui-express';
 // import { environmentConfig } from './environment.config';
-import { roleRoutes } from '../routes/role.routes';
-import { sessionRoutes } from '../routes/session.routes';
-import { testRoutes } from '../routes/test.routes';
-import { userRoutes } from '../routes/user.routes';
 
 export default (app: express.Express): void => {
   const routes: express.Router = express.Router();
@@ -22,9 +28,15 @@ export default (app: express.Express): void => {
   // );
 
   routes.use('/tests', testRoutes);
+
   routes.use('/roles', roleRoutes);
   routes.use('/users', userRoutes);
   routes.use('/auths', sessionRoutes);
+
+  routes.use('/mediciones', medicionRoutes);
+  routes.use('/logs', logRiegoRoutes);
+  routes.use('/electrovalvulas', electrovalvulaRoutes);
+  routes.use('/dispositivos', dispositivoRoutes);
 
   app.use(basePath, routes);
   /*

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Change --db cleanCode to new database name: --db newDatabaseName.
-mongorestore --db gaugemeterTp ./data/dump-db/cleanCode --drop --authenticationDatabase admin -u root -p pass12345
+mongorestore --db gaugemetertp ./data/dump-db/gaugemetertp --drop --authenticationDatabase admin -u root -p pass12345

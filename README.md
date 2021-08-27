@@ -235,8 +235,8 @@ Only for connections with **atlas** you must enable *IS_TLS_MONGO=true*, with on
 > docker exec -it mongodb_dev mongo /bin/bash
 
 #### Backup database:
-> mongodump --authenticationDatabase admin -d cleanCode -u root -p pass12345 -o dump-db
+> mongodump --authenticationDatabase admin -d gaugemetertp -u root -p pass12345 -o dump-db
 
 #### Restore database:
-> mongorestore  --authenticationDatabase admin -d cleanCode -u root -p pass12345
+> mongorestore  --authenticationDatabase admin -d gaugemetertp -u root -p pass12345
 

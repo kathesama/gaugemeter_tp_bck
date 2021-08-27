@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"},"dispositivoID":{"$numberInt":"1"}},"name":"_id_1_dispositivoID_1","background":true,"unique":true}],"uuid":"721a498f833e4e85bf7690d09d96c7ec","collectionName":"mediciones","type":"collection"}
