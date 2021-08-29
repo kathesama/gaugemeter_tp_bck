@@ -115,3 +115,4 @@ dist
 /mongo/db
 /docker-compose.dev.yml
 /.env.prod
+/docker-compose.mongo-dev.yml
