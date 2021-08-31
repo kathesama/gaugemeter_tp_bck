@@ -10,7 +10,8 @@ class DispositivoService {
       DispositivoRepository.find(query).skip(Number(props.from)).limit(Number(props.limit)),
     ]);
 
-    return { total, dispositivos };
+    // return { total, dispositivos };
+    return dispositivos;
   }
 
   async getById(id: string): Promise<DispositivoModel> {

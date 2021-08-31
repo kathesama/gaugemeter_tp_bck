@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import { LogRiegoModel } from '../../domain/models/LogRiego.model';
+import { LogRiegoModel } from '../../domain/models/LogRiego.model';
 
 // aca se crean las interfaces para luego ser implementadas en el useCase de DB
 export interface ILogRiegoModelInterface {
@@ -19,15 +19,25 @@ export interface GetAllLogRiegoInterface {
   findAll: (props: Record<string, unknown>) => Promise<ILogRiegoModelInterface>;
 }
 
+export interface GetAllLogRiegoByDeviceInterface {
+  // eslint-disable-next-line no-unused-vars
+  findAllBYDevice: (id: string, props: Record<string, unknown>) => Promise<ILogRiegoModelInterface>;
+}
+
+export interface GetLastLogByElectovalvulaInterface {
+  // eslint-disable-next-line no-unused-vars
+  findLastByElectrovalvulaId: (id: string) => Promise<ILogRiegoModelInterface>;
+}
+
 // export interface GetOneLogRiegoInterface {
 //   // eslint-disable-next-line no-unused-vars
 //   findOne: (LogRiego: any) => Promise<ILogRiegoModelInterface>;
 // }
 
-// export interface createLogRiegoInterface {
-//   // eslint-disable-next-line no-unused-vars
-//   create: (LogRiego: LogRiegoModel) => Promise<ILogRiegoModelInterface>;
-// }
+export interface addLogRiegoInterface {
+  // eslint-disable-next-line no-unused-vars
+  add: (LogRiego: LogRiegoModel) => Promise<ILogRiegoModelInterface>;
+}
 
 // export interface DeleteLogRiegoInterface {
 //   // eslint-disable-next-line no-unused-vars

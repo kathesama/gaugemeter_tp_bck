@@ -1,7 +1,12 @@
 import { HandleElectrovalvulaUseCaseDB } from '../../data/backEndUseCases/handleElectrovalvulas.db';
+import { HandleLogRiegoUseCaseDB } from '../../data/backEndUseCases/handleLogRiegos.db';
 // import { MakeResetPasswordFactorie, RegisterElectrovalvulaFactorie } from '../../controllers/electrovalvula/PostElectrovalvula.controller';
 
-import { GetAllElectrovalvulas, GetOneElectrovalvula } from '../../controllers/electrovalvula/GetElectrovalvula.controller';
+import {
+  GetAllElectrovalvulas,
+  GetOneElectrovalvula,
+  GetLastLogByElectrovalvula,
+} from '../../controllers/electrovalvula/GetElectrovalvula.controller';
 // import { PatchElectrovalvulaFactorie, RunResetPasswordFactorie } from '../../controllers/electrovalvula/PatchElectrovalvula.controller';
 // import { DeleteElectrovalvulaFactorie } from '../../controllers/electrovalvula/DeleteElectrovalvula.controller';
 // import { BcryptAdapter } from '../adapters/bcrypt.adapter';
@@ -24,6 +29,13 @@ export const makeGetOneElectrovalvulaFactorie = (): GetOneElectrovalvula => {
   return handledElectrovalvulaRegister;
 };
 
+export const makeGetLastLogByElectovalvulaFactorie = (): GetLastLogByElectrovalvula => {
+  const handleElectrovalvulaDB = new HandleLogRiegoUseCaseDB();
+
+  const handledElectrovalvulaRegister = new GetLastLogByElectrovalvula(handleElectrovalvulaDB);
+
+  return handledElectrovalvulaRegister;
+};
 // export const makeRegisterElectrovalvulaFactorie = (): RegisterElectrovalvulaFactorie => {
 //   const handleElectrovalvulaDB = new HandleElectrovalvulaUseCaseDB();
 //   const dcryptAdapter = new BcryptAdapter();

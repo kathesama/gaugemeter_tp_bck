@@ -17,6 +17,11 @@ export interface GetAllElectrovalvulaInterface {
   findAll: (props: Record<string, unknown>) => Promise<IElectrovalvulaModelInterface>;
 }
 
+// export interface GetLastLogByElectovalvulaInterface {
+//   // eslint-disable-next-line no-unused-vars
+//   findLogByElectovalvulaId: (ElectrovalvulaID: string) => Promise<IElectrovalvulaModelInterface>;
+// }
+
 // export interface createElectrovalvulaInterface {
 //   // eslint-disable-next-line no-unused-vars
 //   create: (Electrovalvula: ElectrovalvulaModel) => Promise<IElectrovalvulaModelInterface>;

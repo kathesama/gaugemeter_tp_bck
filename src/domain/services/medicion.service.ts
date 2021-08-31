@@ -1,5 +1,6 @@
 import { MedicionModel } from '../models/Medicion.model';
 import MedicionRepository from '../repositories/medicion.repository';
+import { Types } from 'mongoose';
 
 class MedicionService {
   async get(props: Record<string, unknown>): Promise<any> {
@@ -26,6 +27,17 @@ class MedicionService {
       $and: [{ _id: id }],
     };
     const one: any = MedicionRepository.find(query);
+    return one;
+  }
+
+  async getAllByDispositivoId(deviceId: string, props: Record<string, unknown>): Promise<MedicionModel[]> {
+    // const query = {
+    //   $and: [{ dispositivoId: deviceId }],
+    // };
+
+    const query = { dispositivoID: new Types.ObjectId(deviceId) };
+
+    const one: any = MedicionRepository.find(query).skip(Number(props.from)).limit(Number(props.limit)).sort({ fecha: -1 });
     return one;
   }
 

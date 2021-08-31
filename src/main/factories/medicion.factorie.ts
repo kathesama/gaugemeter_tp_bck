@@ -2,6 +2,7 @@ import { HandleMedicionUseCaseDB } from '../../data/backEndUseCases/handleMedici
 // import { MakeResetPasswordFactorie, RegisterMedicionFactorie } from '../../controllers/medicion/PostMedicion.controller';
 
 import { GetAllMediciones, GetOneMedicion } from '../../controllers/medicion/GetMedicion.controller';
+import { RegisterMedicionFactorie } from '../../controllers/medicion/PostMedicion.controller';
 // import { PatchMedicionFactorie, RunResetPasswordFactorie } from '../../controllers/medicion/PatchMedicion.controller';
 // import { DeleteMedicionFactorie } from '../../controllers/medicion/DeleteMedicion.controller';
 // import { BcryptAdapter } from '../adapters/bcrypt.adapter';
@@ -24,15 +25,13 @@ export const makeGetOneMedicionFactorie = (): GetOneMedicion => {
   return handledMedicionRegister;
 };
 
-// export const makeRegisterMedicionFactorie = (): RegisterMedicionFactorie => {
-//   const handleMedicionDB = new HandleMedicionUseCaseDB();
-//   const dcryptAdapter = new BcryptAdapter();
-//   const handleTokenDB = new HandleTokenUseCaseDB();
+export const makeRegisterMedicionFactorie = (): RegisterMedicionFactorie => {
+  const handleMedicionDB = new HandleMedicionUseCaseDB();
 
-//   const handledMedicionRegister = new RegisterMedicionFactorie(handleMedicionDB, dcryptAdapter, handleTokenDB);
+  const handledMedicionRegister = new RegisterMedicionFactorie(handleMedicionDB);
 
-//   return handledMedicionRegister;
-// };
+  return handledMedicionRegister;
+};
 
 // export const makeUpdateMedicionFactorie = (): PatchMedicionFactorie => {
 //   const handleMedicionDB = new HandleMedicionUseCaseDB();

@@ -4,7 +4,12 @@ import { serverErrorHelper, successHelper } from '../../helpers/http.helper';
 import { HttpRequest, HttpResponse } from '../../interfaces/http.interface';
 import { logger } from '../../main/config';
 
-import { GetOneLogRiegoInterface, GetAllLogRiegoInterface } from '../../interfaces/useCaseDTO/LogRiego.interfaces';
+import {
+  GetLastLogByElectovalvulaInterface,
+  GetOneLogRiegoInterface,
+  GetAllLogRiegoInterface,
+  GetAllLogRiegoByDeviceInterface,
+} from '../../interfaces/useCaseDTO/LogRiego.interfaces';
 
 export class GetAllLogRiegos implements ControllerInterface {
   constructor(private readonly getLogRiego: GetAllLogRiegoInterface) {
@@ -14,9 +19,50 @@ export class GetAllLogRiegos implements ControllerInterface {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       // object destructuration
-      const { limit = 5, from = 0 } = httpRequest.query;
+      const { limit = 10, from = 0 } = httpRequest.query;
 
       const logRiego: any = await this.getLogRiego.findAll({ limit, from });
+
+      return successHelper(logRiego);
+    } catch (error) {
+      logger.error(error);
+      throw serverErrorHelper(error);
+    }
+  }
+}
+
+export class GetAllLogRiegosByDevice implements ControllerInterface {
+  constructor(private readonly getLogRiego: GetAllLogRiegoByDeviceInterface) {
+    this.getLogRiego = getLogRiego;
+  }
+
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      // object destructuration
+      const { limit = 10, from = 0 } = httpRequest.query;
+      const { dispositivoId } = httpRequest.params;
+
+      const logRiego: any = await this.getLogRiego.findAllBYDevice(dispositivoId, { limit, from });
+
+      return successHelper(logRiego);
+    } catch (error) {
+      logger.error(error);
+      throw serverErrorHelper(error);
+    }
+  }
+}
+
+export class GetLastLogRiegosByElectrovalvula implements ControllerInterface {
+  constructor(private readonly getLogRiego: GetLastLogByElectovalvulaInterface) {
+    this.getLogRiego = getLogRiego;
+  }
+
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      // object destructuration
+      const { dispositivoId } = httpRequest.params;
+
+      const logRiego: any = await this.getLogRiego.findLastByElectrovalvulaId(dispositivoId);
 
       return successHelper(logRiego);
     } catch (error) {

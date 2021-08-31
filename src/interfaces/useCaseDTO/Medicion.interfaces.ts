@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import { MedicionModel } from '../../domain/models/Medicion.model';
+import { MedicionModel } from '../../domain/models/Medicion.model';
 
 // aca se crean las interfaces para luego ser implementadas en el useCase de DB
 export interface IMedicionModelInterface {
@@ -19,15 +19,20 @@ export interface GetAllMedicionesInterface {
   findAll: (props: Record<string, unknown>) => Promise<IMedicionModelInterface>;
 }
 
+export interface GetAllMedicionesByDeviceInterface {
+  // eslint-disable-next-line no-unused-vars
+  findAllByDevice: (dispositivoId: string, props: Record<string, unknown>) => Promise<IMedicionModelInterface[]>;
+}
+
 // export interface GetOneMedicionInterface {
 //   // eslint-disable-next-line no-unused-vars
 //   findOne: (Medicion: any) => Promise<IMedicionModelInterface>;
 // }
 
-// export interface createMedicionInterface {
-//   // eslint-disable-next-line no-unused-vars
-//   create: (Medicion: MedicionModel) => Promise<IMedicionModelInterface>;
-// }
+export interface addMedicionInterface {
+  // eslint-disable-next-line no-unused-vars
+  add: (Medicion: MedicionModel) => Promise<IMedicionModelInterface>;
+}
 
 // export interface DeleteMedicionInterface {
 //   // eslint-disable-next-line no-unused-vars

@@ -26,7 +26,7 @@ dispositivoSchema.index({ _id: 1, electrovalvulaID: 1 }, { unique: true });
 dispositivoSchema.method('toJSON', function () {
   const { _id, ...temporaryObject } = this.toObject();
 
-  temporaryObject['uuid'] = _id;
+  temporaryObject['dispositivoId'] = _id;
   delete temporaryObject['__v'];
   delete temporaryObject['createdAt'];
   delete temporaryObject['updatedAt'];

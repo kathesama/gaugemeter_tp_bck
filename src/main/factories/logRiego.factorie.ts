@@ -2,6 +2,7 @@ import { HandleLogRiegoUseCaseDB } from '../../data/backEndUseCases/handleLogRie
 // import { MakeResetPasswordFactorie, RegisterLogRiegoFactorie } from '../../controllers/logRiego/PostLogRiego.controller';
 
 import { GetAllLogRiegos, GetOneLogRiego } from '../../controllers/logRiego/GetLogRiego.controller';
+import { RegisterLogRiegoFactorie } from '../../controllers/logRiego/PostLogRiego.controller';
 // import { PatchLogRiegoFactorie, RunResetPasswordFactorie } from '../../controllers/logRiego/PatchLogRiego.controller';
 // import { DeleteLogRiegoFactorie } from '../../controllers/logRiego/DeleteLogRiego.controller';
 // import { BcryptAdapter } from '../adapters/bcrypt.adapter';
@@ -24,15 +25,13 @@ export const makeGetOneLogRiegoFactorie = (): GetOneLogRiego => {
   return handledLogRiegoRegister;
 };
 
-// export const makeRegisterLogRiegoFactorie = (): RegisterLogRiegoFactorie => {
-//   const handleLogRiegoDB = new HandleLogRiegoUseCaseDB();
-//   const dcryptAdapter = new BcryptAdapter();
-//   const handleTokenDB = new HandleTokenUseCaseDB();
+export const makeRegisterLogRiegoFactorie = (): RegisterLogRiegoFactorie => {
+  const handleLogRiegoDB = new HandleLogRiegoUseCaseDB();
 
-//   const handledLogRiegoRegister = new RegisterLogRiegoFactorie(handleLogRiegoDB, dcryptAdapter, handleTokenDB);
+  const handledLogRiegoRegister = new RegisterLogRiegoFactorie(handleLogRiegoDB);
 
-//   return handledLogRiegoRegister;
-// };
+  return handledLogRiegoRegister;
+};
 
 // export const makeUpdateLogRiegoFactorie = (): PatchLogRiegoFactorie => {
 //   const handleLogRiegoDB = new HandleLogRiegoUseCaseDB();

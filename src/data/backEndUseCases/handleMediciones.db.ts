@@ -1,8 +1,16 @@
 import { MedicionModel } from '../../domain/models/Medicion.model';
 import MedicionService from '../../domain/services/medicion.service';
-import { IMedicionModelInterface, GetOneMedicionInterface, GetAllMedicionesInterface } from '../../interfaces/useCaseDTO/Medicion.interfaces';
+import { GetAllMedicionesByDeviceInterface } from '../../interfaces/useCaseDTO/Medicion.interfaces';
+import {
+  IMedicionModelInterface,
+  GetOneMedicionInterface,
+  GetAllMedicionesInterface,
+  addMedicionInterface,
+} from '../../interfaces/useCaseDTO/Medicion.interfaces';
 
-export class HandleMedicionUseCaseDB implements GetOneMedicionInterface, GetAllMedicionesInterface {
+export class HandleMedicionUseCaseDB
+  implements GetOneMedicionInterface, GetAllMedicionesInterface, addMedicionInterface, GetAllMedicionesByDeviceInterface
+{
   medicionService: any;
 
   constructor() {
@@ -18,6 +26,12 @@ export class HandleMedicionUseCaseDB implements GetOneMedicionInterface, GetAllM
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async findAll(props: Record<string, unknown>): Promise<IMedicionModelInterface> {
     const dispositivolaDB: any = await this.medicionService.get(props);
+
+    return new Promise((resolve) => resolve(dispositivolaDB));
+  }
+
+  async findAllByDevice(deviceId: string, props: Record<string, unknown>): Promise<IMedicionModelInterface[]> {
+    const dispositivolaDB: any = await this.medicionService.getAllByDispositivoId(deviceId, props);
 
     return new Promise((resolve) => resolve(dispositivolaDB));
   }

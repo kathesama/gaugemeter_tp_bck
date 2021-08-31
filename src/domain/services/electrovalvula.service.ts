@@ -1,5 +1,6 @@
 import { ElectrovalvulaModel } from '../models/Electrovalvula.model';
 import ElectrovalvulaRepository from '../repositories/electrovalvula.repository';
+import { Types } from 'mongoose';
 
 class ElectrovalvulaService {
   async get(props: Record<string, unknown>): Promise<any> {
@@ -26,6 +27,14 @@ class ElectrovalvulaService {
       $and: [{ _id: id }],
     };
     const one: any = ElectrovalvulaRepository.find(query);
+    return one;
+  }
+
+  async getLastById(id: string): Promise<ElectrovalvulaModel[]> {
+    const query = {
+      $and: [{ dispositivoId: new Types.ObjectId(id) }],
+    };
+    const one: any = ElectrovalvulaRepository.findOne(query).sort({ fecha: -1 });
     return one;
   }
 
