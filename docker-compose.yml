@@ -1,7 +1,28 @@
 version: "3.7"
 services:
-  gaugemeter_tp_bck:
-    image: kathemica/gaugemeter_tp_bck:1.0.3
+  mongodb_dev:
+    image: mongo:latest
+    container_name: mongodb_dev
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass12345
+    volumes:
+      - ./mongo/db:/data/db
+      - ./mongo/dump-db:/data/dump-db
+      - ./mongo/restore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+    networks:
+      -   api_server_default
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  gaugemeter_bck:
+    image: kathemica/gaugemeter_bck:1.0.2
     hostname: node-backend
     container_name: node-backend
     restart: always
@@ -25,6 +46,8 @@ services:
     networks:
       - api_server_default
     command: node ./src/main/server/server.js
+    depends_on:
+      - mongodb_dev
 networks:
   api_server_default:
     driver: bridge
