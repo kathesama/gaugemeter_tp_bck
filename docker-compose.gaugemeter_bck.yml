@@ -8,7 +8,7 @@ services:
     volumes:
       - ./certs:/usr/app/certs
     environment:
-      - MONGO_URL=mongodb://root:pass12345@10.0.0.101:27017/?authSource=admin
+      - MONGO_URL=mongodb://root:pass12345@<YOUR IP ADDRESS HERE>:27017/?authSource=admin
       - IS_TLS_MONGO=false
       - DB_NAME=gaugemetertp
       - SERVER_FINGERKEY=987asy87tdsyakjhsbdahsd´90as8d0a98sda12453454fbfgb
