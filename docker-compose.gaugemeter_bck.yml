@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  gaugemeter_bck:
+    image:  kathemica/gaugemeter_bck:1.0.1
+    hostname: node-backend
+    container_name: node-backend
+    restart: always
+    volumes:
+      - ./certs:/usr/app/certs
+    environment:
+      - MONGO_URL=mongodb://root:pass12345@10.0.0.101:27017/?authSource=admin
+      - IS_TLS_MONGO=false
+      - DB_NAME=gaugemetertp
+      - SERVER_FINGERKEY=987asy87tdsyakjhsbdahsd´90as8d0a98sda12453454fbfgb
+      - SENDGRID_API_KEY=SG.dH3vMyasdasdbbV2qg.MDatasdasdasd5ye-ryaIbj6faKasdasdasdto6Eg
+      - JWT_SECRET=0p9o1u23oeiu23rhj3bjknOIUY(/&%R&/4765ytagiwkjnkasdj)
+      - CA_TOKEN_MONGO=KKljaushjkldanbsbhkjasdlañksnbdlas
+      - MAIL_OWNER=Admin Admin
+      - MAIL_USERNAME=Admin
+      - MAIL_FROM=comemail@domain.com
+      - isHTTPS=false
+    ports:
+      - 8051:8051
+      - 443:443
+    networks:
+      - api_server_default
+    command: node ./src/main/server/server.js
+networks:
+  api_server_default:
+    driver: bridge
