@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   gaugemeter_bck:
-    image: kathemica/gaugemeter_bck:1.0.2
+    image: kathemica/gaugemeter_bck:1.0.1
     hostname: node-backend
     container_name: node-backend
     restart: always
